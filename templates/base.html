@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Підключення Tailwind CSS через CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}{% endblock %} - Мій Flask Додаток</title>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Головне меню -->
+    <nav class="bg-gray-800 shadow p-4 mb-6">
+        <ul class="flex space-x-4">
+            <li><a href="/" class="text-blue-500 hover:text-blue-700">Головна</a></li>
+            <li><a href="/about" class="text-blue-500 hover:text-blue-700">Про нас</a></li>
+            <li><a href="/contact" class="text-blue-500 hover:text-blue-700">Контакти</a></li>
+        </ul>
+    </nav>
+
+    <!-- Основний контент -->
+    <div class="container mx-auto px-4">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
