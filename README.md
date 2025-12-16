@@ -38,7 +38,28 @@ Backend:
 
 🗂 Структура проєкту text
 
-project/ │ ├── public/ │ ├── index.html │ ├── css/ │ │ └── style.css │ ├── js/ │ │ └── app.js │ └── images/ │ ├── server/ │ ├── server.js (або index.php) │ ├── config/ │ │ └── database.js │ ├── routes/ │ └── models/ │ ├── database/ │ ├── schema.sql │ └── sample_data.sql │ └── README.md
+project/
+│
+├── public/
+│   ├── index.html
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── app.js
+│   └── images/
+│
+├── server/
+│   ├── server.js (або index.php)
+│   ├── config/
+│   │   └── database.js
+│   ├── routes/
+│   └── models/
+│
+├── database/
+│   ├── schema.sql
+│   └── sample_data.sql
+│
+└── README.md
 
 🔧 Налаштування БД sql
 
