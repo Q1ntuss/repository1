@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6 text-center">{{ product.name }}</h1>
+
+<div class="flex flex-col md:flex-row gap-6">
+    
+    <div class="md:w-1/2 bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden">
+        <img 
+            src="{% if product.image_url %}{{ product.image_url }}{% else %}https://source.unsplash.com/500x400/?{{ product.name | urlencode }}{% endif %}" 
+            alt="{{ product.name }}" 
+            class="object-contain h-full w-full"
+            onerror="this.src='/static/placeholder.png';"
+        >
+    </div>
+
+    <!-- Інформація про продукт -->
+    <div class="md:w-1/2 flex flex-col justify-between">
+        <p class="text-gray-700 mb-4">{{ product.description }}</p>
+        <span class="text-2xl font-bold mb-4">{{ product.price }} грн</span>
+        <div class="flex flex-col gap-4">
+            <a href="{{ url_for('add_to_cart', product_id=product.id) }}"
+               class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition w-max">
+               Додати до кошика
+            </a>
+            <a href="{{ url_for('shop') }}"
+               class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition w-max text-center">
+               Назад до магазину
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,6 +1,53 @@
 {% extends "base.html" %}
+
 {% block title %}Контакти{% endblock %}
+
 {% block content %}
-<h1 class="text-2xl font-bold mb-4">Контакти</h1>
-<p>Тут контакти для зв'язку.</p>
+<div class="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-lg mt-8">
+    <h1 class="text-4xl font-extrabold mb-4 text-center text-gray-800">Контакти</h1>
+    <p class="text-gray-600 mb-8 text-center text-lg">
+        Зв'яжіться з нами будь-яким зручним способом.
+    </p>
+
+    <!-- Контактна інформація -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8 text-center">
+        <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="text-3xl mb-2 text-indigo-600">📧</span>
+            <a href="mailto:info@example.com" class="text-gray-700 hover:text-indigo-600 font-medium">info@example.com</a>
+        </div>
+
+        <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="text-3xl mb-2 text-indigo-600">📞</span>
+            <p class="text-gray-700 font-medium select-text hover:text-indigo-600 cursor-default">
+                +38 (050) 542-23-67
+            </p>
+        </div>
+
+        <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="text-3xl mb-2 text-indigo-600">📍</span>
+            <p class="text-gray-700 font-medium">м. Луцьк, вул. Кафедральна, 6</p>
+        </div>
+    </div>
+
+    <!-- Форма зворотного зв'язку -->
+    <h2 class="text-2xl font-semibold mb-4 text-gray-800 text-center">
+        Форма зворотного зв'язку
+    </h2>
+
+    <form action="{{ url_for('contact') }}" method="POST" class="space-y-4">
+        <input type="text" name="name" placeholder="Ваше ім'я" 
+               class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" required>
+
+        <input type="email" name="email" placeholder="Ваш Email" 
+               class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" required>
+
+        <textarea name="message" placeholder="Ваше повідомлення" rows="5"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" required></textarea>
+
+        <button type="submit" 
+                class="w-full bg-gradient-to-r from-green-400 to-green-600 text-white font-medium py-3 rounded-lg hover:from-green-500 hover:to-green-700 transition">
+            Надіслати
+        </button>
+    </form>
+</div>
 {% endblock %}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>API Demo — Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .item {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #f5f5f5;
+            border-left: 4px solid #007bff;
+        }
+        #message {
+            display: none;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        #message.success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        #message.error {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        #loading {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+        }
+        #loading.show {
+            display: block;
+        }
+        form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        form button {
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Products API Demo</h1>
+    
+    <div id="message"></div>
+    <div id="loading">⏳ Завантаження...</div>
+
+    <h2>Список продуктів</h2>
+    <div id="dataList"></div>
+
+    <h2>Додати новий продукт</h2>
+    <form id="addForm">
+      <label>Назва:</label><br>
+      <input id="name" type="text" required><br>
+      <label>Ціна:</label><br>
+      <input id="price" type="number" step="0.01" required><br>
+      <label>Опис (опціонально):</label><br>
+      <input id="description" type="text"><br><br>
+      <button type="submit">Додати продукт</button>
+    </form>
+  </div>
+
+  <script>
+    const API_URL = '/api/products';
+
+    function showLoading(show) {
+      document.getElementById('loading').classList.toggle('show', show);
+    }
+
+    function showMessage(text, type) {
+      const box = document.getElementById('message');
+      box.textContent = text;
+      box.className = type;
+      box.style.display = 'block';
+      setTimeout(() => box.style.display = 'none', 3000);
+    }
+
+    async function loadData() {
+      try {
+        showLoading(true);
+        const resp = await fetch(API_URL);
+        if (!resp.ok) throw new Error(`HTTP error! status: ${resp.status}`);
+        const data = await resp.json();
+        displayData(data);
+      } catch (err) {
+        showMessage('❌ Помилка завантаження: ' + err.message, 'error');
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    async function addProduct(product) {
+      try {
+        showLoading(true);
+        const resp = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(product)
+        });
+        if (!resp.ok) throw new Error(`HTTP error! status: ${resp.status}`);
+        showMessage('✅ Продукт додано', 'success');
+        await loadData();
+      } catch (err) {
+        showMessage('❌ Помилка додавання: ' + err.message, 'error');
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    function displayData(items) {
+      const container = document.getElementById('dataList');
+      container.innerHTML = '';
+      if (!items || items.length === 0) {
+        container.innerHTML = '<div>📭 Немає продуктів</div>';
+        return;
+      }
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `
+          <strong>${item.name || 'Без назви'}</strong><br>
+          <em>Ціна: ${item.price !== undefined ? item.price : '—'}</em><br>
+          <p>${item.description || ''}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    document.getElementById('addForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const price = parseFloat(document.getElementById('price').value);
+      const description = document.getElementById('description').value.trim();
+
+      if (name.length < 2) {
+        showMessage('❌ Назва має бути мінімум 2 символи', 'error');
+        return;
+      }
+
+      const product = { name, price, description };
+      await addProduct(product);
+      e.target.reset();
+    });
+
+    window.addEventListener('load', loadData);
+  </script>
+</body>
+</html>

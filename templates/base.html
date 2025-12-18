@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ук">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +7,78 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>{% block title %}{% endblock %} - Мій Flask Додаток</title>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gradient-to-b from-white via-gray-50 to-white font-sans min-h-screen">
+
     <!-- Головне меню -->
-    <nav class="bg-gray-800 shadow p-4 mb-6">
-        <ul class="flex space-x-4">
-            <li><a href="/" class="text-blue-500 hover:text-blue-700">Головна</a></li>
-            <li><a href="/about" class="text-blue-500 hover:text-blue-700">Про нас</a></li>
-            <li><a href="/contact" class="text-blue-500 hover:text-blue-700">Контакти</a></li>
+<nav class="bg-gradient-to-r from-green-400 to-green-600 shadow-lg">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+        <!-- Ліве меню -->
+        <ul class="flex flex-wrap space-x-4 py-4">
+            <li>
+                <a href="/" class="text-white font-medium px-3 py-2 rounded-lg hover:bg-green-700 transition">
+                    Головна
+                </a>
+            </li>
+            <li>
+                <a href="/about" class="text-white font-medium px-3 py-2 rounded-lg hover:bg-green-700 transition">
+                    Про нас
+                </a>
+            </li>
+            <li>
+                <a href="/contact" class="text-white font-medium px-3 py-2 rounded-lg hover:bg-green-700 transition">
+                    Зворотній зв'язок
+                </a>
+            </li>
+            <li>
+                <a href="/feedback" class="text-white font-medium px-3 py-2 rounded-lg hover:bg-green-700 transition">
+                    Відгуки
+                </a>
+            </li>
+            <li>
+                <a href="/shop" class="text-white font-medium px-3 py-2 rounded-lg hover:bg-green-700 transition">
+                    Товари
+                </a>
+            </li>
+            <li>
+                <a href="/cart" class="text-white font-medium px-3 py-2 rounded-lg hover:bg-green-700 transition">
+                    Кошик
+                </a>
+            </li>
         </ul>
-    </nav>
+
+        <!-- Праве меню: Вхід / Реєстрація / Logout -->
+        <ul class="flex space-x-4 py-4">
+            {% if session.get('user_email') %}
+                <li>
+                    <span class="text-white font-medium px-3 py-2 rounded-lg">
+                        {{ session['user_email'] }}
+                    </span>
+                </li>
+                <li>
+                    <a href="/logout" class="bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-medium px-3 py-2 rounded-lg transition">
+                        Вийти
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="/login" class="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-medium px-3 py-2 rounded-lg transition">
+                        Вхід
+                    </a>
+                </li>
+                <li>
+                    <a href="/register" class="bg-gradient-to-r from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white font-medium px-3 py-2 rounded-lg transition">
+                        Реєстрація
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
 
     <!-- Основний контент -->
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 py-8">
         {% block content %}{% endblock %}
     </div>
+
 </body>
 </html>

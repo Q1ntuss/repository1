@@ -3,22 +3,69 @@
 {% block title %}Про нас{% endblock %}
 
 {% block content %}
-<h1 class="text-2xl font-bold mb-4">Про нас</h1>
+<div class="min-h-[70vh] px-4 py-8">
+  <div class="max-w-6xl mx-auto">
 
-<p>Це проєкт 3 лабораторної роботи зі створення сайту, який створили студенти групи ІПЗ-21:</p>
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+        Про нас
+      </h1>
+<p class="max-w-3xl mx-auto text-lg leading-relaxed
+          bg-gradient-to-r from-blue-500 to-purple-600
+          bg-clip-text text-transparent">
+  Ми створили цей інтернет-магазин з простою метою — 
+  зробити онлайн-покупки зручними, зрозумілими та доступними для кожного.
+  Тут ви легко знайдете потрібні товари, швидко оформите замовлення 
+  та отримаєте приємний досвід користування.
+</p>
+    </div>
 
-<ul class="mt-4 space-y-2">
-    <li class="flex items-center">
-        <span class="font-semibold text-blue-600 mr-2">Семенов Владислав</span>
-        <span class="text-gray-600">– студент</span>
-    </li>
-    <li class="flex items-center">
-        <span class="font-semibold text-blue-600 mr-2">Бондарук Владислав</span>
-        <span class="text-gray-600">– студент</span>
-    </li>
-    <li class="flex items-center">
-        <span class="font-semibold text-blue-600 mr-2">Сасін Павло</span>
-        <span class="text-gray-600">– студент</span>
-    </li>
-</ul>
+    <!-- Team grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+
+      <!-- Card -->
+      <div class="group bg-white rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 p-6 text-center">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center text-2xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition">
+          👨‍🎓
+        </div>
+        <p class="font-semibold text-lg">Семенов Владислав</p>
+        <p class="text-gray-500 text-sm">Розробник</p>
+      </div>
+
+      <div class="group bg-white rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 p-6 text-center">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center text-2xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition">
+          👨‍🎓
+        </div>
+        <p class="font-semibold text-lg">Бондарук Владислав</p>
+        <p class="text-gray-500 text-sm">Розробник</p>
+      </div>
+
+      <div class="group bg-white rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 p-6 text-center">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center text-2xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition">
+          👨‍🎓
+        </div>
+        <p class="font-semibold text-lg">Сасін Павло</p>
+        <p class="text-gray-500 text-sm">Розробник</p>
+      </div>
+
+      <div class="group bg-white rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 p-6 text-center">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center text-2xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition">
+          👨‍🎓
+        </div>
+        <p class="font-semibold text-lg">Жук Максим</p>
+        <p class="text-gray-500 text-sm">Розробник</p>
+      </div>
+
+      <div class="group bg-white rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 p-6 text-center">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center text-2xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition">
+          👨‍🎓
+        </div>
+        <p class="font-semibold text-lg">Остапчук Богдан</p>
+        <p class="text-gray-500 text-sm">Розробник</p>
+      </div>
+
+    </div>
+  </div>
+</div>
 {% endblock %}

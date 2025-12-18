@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Вхід в адмін-панель{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-20 p-8 bg-white rounded-xl shadow-lg">
+  <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Вхід в адмін-панель</h1>
+  
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="space-y-2 mb-4">
+        {% for category, msg in messages %}
+          <div class="p-3 rounded-lg text-white {% if category == 'success' %}bg-green-500{% else %}bg-red-500{% endif %}">
+            {{ msg }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <form action="{{ url_for('admin_login') }}" method="POST" class="space-y-4">
+    <input type="password" name="password" placeholder="Пароль" required
+           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
+    <button type="submit"
+            class="w-full bg-gradient-to-r from-green-400 to-green-600 text-white font-medium py-3 rounded-lg hover:from-green-500 hover:to-green-700 transition">
+      Увійти
+    </button>
+  </form>
+</div>
+{% endblock %}

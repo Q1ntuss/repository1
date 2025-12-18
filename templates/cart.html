@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Кошик{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6 text-center">Кошик</h1>
+
+{% if cart %}
+<div class="space-y-4">
+    {% for key, item in cart.items() %}
+    <div class="flex flex-col sm:flex-row items-center bg-white rounded-xl shadow-md p-4">
+
+        <div class="flex-1">
+            <h2 class="text-lg font-semibold mb-2">{{ item.name }}</h2>
+
+            <p class="text-gray-600 mb-2">
+                Ціна: <span class="font-bold">{{ item.price }} грн</span>
+            </p>
+
+            <p class="text-gray-600 mb-2 flex items-center gap-3">
+                Кількість:
+                <span class="font-bold">{{ item.quantity }}</span>
+
+                <!-- −1 -->
+                <form action="{{ url_for('decrease_cart_item', product_id=key) }}"
+                      method="post">
+                    <button type="submit"
+                            class="bg-gray-200 px-3 py-1 rounded-lg hover:bg-gray-300">
+                        −
+                    </button>
+                </form>
+            </p>
+
+            <p class="text-gray-800 font-bold">
+                Всього: {{ item.price * item.quantity }} грн
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="mt-6 text-right">
+    <p class="text-2xl font-bold">
+        Загальна вартість:
+        <span class="text-indigo-600">{{ total }} грн</span>
+    </p>
+</div>
+
+<form action="{{ url_for('checkout') }}" method="post"
+      class="bg-white p-6 rounded-xl shadow-md max-w-lg mx-auto mt-6">
+    <div class="mb-4">
+        <label class="block mb-2 font-medium">Email:</label>
+        <input type="email" name="email" required class="w-full p-3 border rounded-lg">
+    </div>
+
+    <div class="mb-4">
+        <label class="block mb-2 font-medium">Адреса доставки:</label>
+        <textarea name="address" required class="w-full p-3 border rounded-lg"></textarea>
+    </div>
+
+    <button type="submit"
+            class="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600">
+        Оплатити замовлення
+    </button>
+</form>
+
+{% else %}
+<p class="text-center text-gray-500 text-lg mt-8">
+    Ваш кошик порожній.
+</p>
+{% endif %}
+{% endblock %}

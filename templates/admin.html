@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}Адмін-панель{% endblock %}
+
+{% block content %}
+{% if not session.get('admin') %}
+  {% set _ = flash("Будь ласка, введіть пароль", "error") %}
+  {{ redirect(url_for('admin_login')) }}
+{% else %}
+<div class="max-w-7xl mx-auto px-4 py-8 space-y-12">
+
+  <!-- Заголовок -->
+  <div class="text-center mb-10">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-2 bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+      Адмін-панель
+    </h1>
+    <p class="text-gray-600">Керування відгуками, товарами та повідомленнями зі зворотного зв'язку</p>
+  </div>
+
+  <!-- Відгуки -->
+  <div class="space-y-4">
+    <h2 class="text-2xl font-semibold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+      Відгуки користувачів
+    </h2>
+    <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-md">
+      <table class="w-full text-sm table-auto">
+        <thead class="bg-gray-100 text-gray-700 uppercase text-left">
+          <tr>
+            <th class="px-4 py-3">Імʼя</th>
+            <th class="px-4 py-3">Повідомлення</th>
+            <th class="px-4 py-3 text-center">Дата</th>
+            <th class="px-4 py-3 text-center">Дії</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y">
+          {% for fb in feedbacks %}
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 font-medium">{{ fb.name }}</td>
+            <td class="px-4 py-3 text-gray-600">{{ fb.message }}</td>
+            <td class="px-4 py-3 text-center text-gray-500">{{ fb.created_at }}</td>
+            <td class="px-4 py-3 text-center">
+              <a href="/feedback/delete/{{ fb.id }}"
+                 class="text-red-600 hover:text-red-800 font-medium transition">
+                Видалити
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Товари -->
+  <div class="space-y-4">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-4">
+      <h2 class="text-2xl font-semibold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+        Товари
+      </h2>
+      <a href="/shop/add"
+         class="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white px-5 py-2 rounded-xl font-medium transition shadow-lg">
+        + Додати товар
+      </a>
+    </div>
+    <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-md">
+      <table class="w-full text-sm table-auto">
+        <thead class="bg-gray-100 text-gray-700 uppercase text-left">
+          <tr>
+            <th class="px-4 py-3">Назва</th>
+            <th class="px-4 py-3">Опис</th>
+            <th class="px-4 py-3 text-center">Ціна</th>
+            <th class="px-4 py-3 text-center">В наявності</th>
+            <th class="px-4 py-3 text-center">Дії</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y">
+          {% for product in products %}
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 font-medium">{{ product.name }}</td>
+            <td class="px-4 py-3 text-gray-600">{{ product.description }}</td>
+            <td class="px-4 py-3 text-center">{{ product.price }} ₴</td>
+            <td class="px-4 py-3 text-center">{{ product.stock }}</td>
+            <td class="px-4 py-3 text-center">
+              <a href="/shop/delete/{{ product.id }}"
+                 class="text-red-600 hover:text-red-800 font-medium transition">
+                Видалити
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Контактні повідомлення -->
+  <div class="space-y-4">
+    <h2 class="text-2xl font-semibold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+      Повідомлення зі зворотного зв'язку
+    </h2>
+    <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-md">
+      <table class="w-full text-sm table-auto">
+        <thead class="bg-gray-100 text-gray-700 uppercase text-left">
+          <tr>
+            <th class="px-4 py-3">Імʼя</th>
+            <th class="px-4 py-3">Email</th>
+            <th class="px-4 py-3">Повідомлення</th>
+            <th class="px-4 py-3 text-center">Дата</th>
+            <th class="px-4 py-3 text-center">Дії</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y">
+          {% for msg in contact_messages %}
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 font-medium">{{ msg.name }}</td>
+            <td class="px-4 py-3 text-gray-600">{{ msg.email }}</td>
+            <td class="px-4 py-3 text-gray-600">{{ msg.message }}</td>
+            <td class="px-4 py-3 text-center text-gray-500">{{ msg.created_at }}</td>
+            <td class="px-4 py-3 text-center">
+              <a href="/contact/delete/{{ msg.id }}"
+                 class="text-red-600 hover:text-red-800 font-medium transition">
+                Видалити
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endif %}
+{% endblock %}

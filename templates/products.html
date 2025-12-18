@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продукти</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .product {
+            background-color: #904242;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .product h3 {
+            margin-top: 0;
+        }
+        .product p {
+            margin: 5px 0;
+        }
+        .buy-button {
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .buy-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Продукти</h1>
+    <div class="container" id="productsContainer">
+    
+    </div>
+
+    <script>
+        
+        const apiUrl = '/api/products';  
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('productsContainer');
+                const products = data.продукти || [];
+
+                if (products.length === 0) {
+                    container.innerHTML = '<p>Продукти відсутні.</p>';
+                    return;
+                }
+
+                products.forEach(product => {
+                    const div = document.createElement('div');
+                    div.className = 'product';
+                    div.innerHTML = `
+                        <h3>${product['ім\'я']}</h3>
+                        <p><strong>Ціна:</strong> $${product['ціна']}</p>
+                        <p><strong>В наявності:</strong> ${product['запас']}</p>
+                        <p>${product['опис']}</p>
+                        <button class="buy-button">Купити</button>
+                    `;
+                    container.appendChild(div);
+                });
+            })
+            .catch(err => {
+                console.error('Помилка підвантаження продуктів:', err);
+                document.getElementById('productsContainer').innerHTML = '<p>Не вдалося завантажити продукти.</p>';
+            });
+    </script>
+</body>
+</html>

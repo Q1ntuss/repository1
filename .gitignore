@@ -1,28 +1,8 @@
-# Python / Flask
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.db
-instance/
-.env
 venv/
-.env/
-*.sqlite3
-
-# VS Code
-.vscode/
-
-# Logs
-*.log
-
-# Node / Tailwind
+__pycache__/
+*.pyc
+.env
 node_modules/
-dist/
-build/
-*.lock
-package-lock.json
-
-# System
 .DS_Store
-Thumbs.dbS
+.env
+data/database.db
