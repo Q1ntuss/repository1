@@ -275,25 +275,30 @@ def get_order_details(order_id):
 
 ### Форма зворотного зв'язку
 
-![Форма зворотного зв'язку](шлях/до/скріншоту)
+<img width="891" height="806" alt="image" src="https://github.com/user-attachments/assets/48ca4578-ae71-45b1-868d-0826ca801a99" />
+
 
 ### Каталог товарів
 
-![Каталог товарів](шлях/до/скріншоту)
+<img width="1896" height="859" alt="image" src="https://github.com/user-attachments/assets/7ca88276-7bc6-4c3c-abcc-02c8f53e1fe1" />
+
 
 ### Адміністративна панель
 
-![Адмін-панель](шлях/до/скріншоту)
+<img width="1437" height="834" alt="image" src="https://github.com/user-attachments/assets/bfcf756b-40f1-4af1-8f2d-2870cfc7dcbd" />
+
 
 ### Управління замовленнями
 
-![Управління замовленнями](шлях/до/скріншоту)
+<img width="1920" height="868" alt="image" src="https://github.com/user-attachments/assets/7643a07c-baab-4a57-9cdf-c099617e3caf" />
+
 
 ### Додаткова функціональність
 
-![Додаткова функція](шлях/до/скріншоту)
+<img width="1917" height="869" alt="image" src="https://github.com/user-attachments/assets/746cb94c-c5b5-477e-a909-4612d72623d4" />
 
-## Тестування
+
+## Тестування 
 
 ### Сценарії тестування
 
@@ -316,6 +321,6 @@ def get_order_details(order_id):
 Командна робота організована через Git і розподіл обов’язків
 Можливі покращення: система рейтингів, фільтри та пошук товарів
 
-Очікувана оцінка: 6-7
+Очікувана оцінка: 7-9
 
 Обґрунтування: Робота повністю відповідає вимогам рівнів 1 та 2, всі CRUD операції реалізовано, функціональність протестована, адмін-панель працює коректно.
