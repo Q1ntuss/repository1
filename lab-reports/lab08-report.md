@@ -34,12 +34,6 @@ SQLite база зберігається у volume `sqlite_data`, змонтов
 - Healthcheck для перевірки доступності сервісу на порті 5000.
 - Використання environment variables для конфігурації Flask та шляху до бази даних.
 
-## Інструкції з розгортання
-
-1. Клонуйте репозиторій:
-   ```bash
-   git clone https://github.com/Q1ntuss/repository1.git
-   cd repository1
 
 ## Можливі покращення
 
